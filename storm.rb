@@ -10,10 +10,10 @@ require 'audite'
 
 def strobe(cycles)
   cycles.times do
-    rand(3..6).times do
+    rand(3..10).times do
       light = @client.lights[rand(0..2)]
-      light.set_state({bri: rand(100..254), on: true, transitiontime: rand(0..4)})
-      light.set_state({:on => false, color_temperature: 153, transitiontime: rand(0..4)})
+      light.set_state({bri: rand(150..254), on: true, transitiontime: rand(0..3)})
+      light.set_state({:on => false, color_temperature: 153, transitiontime: rand(0..3)})
     end
   end
 end
@@ -35,8 +35,8 @@ while true do
   puts "Thunder Clap"
   thunder
 
-  sleep_time = rand(0..600)
-  puts "Sleeping for #{sleep_time/60} minutes"
+  sleep_time = rand(0..300)
+  puts "Sleeping for #{(sleep_time/60.0).round(1)} minutes"
   sleep(sleep_time)
   puts "-------------Waking-------------------------"
 end
