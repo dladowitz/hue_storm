@@ -1,3 +1,9 @@
+# Color Chooser
+# http://colllor.com/
+
+# Whitest Tempeature: 153
+
+
 require 'hue'
 require 'audite'
 
@@ -15,6 +21,11 @@ def strobe(strike_distance)
 
   brightness = (254/strike_distance).round(0)
   puts "Brightness is #{brightness}"
+  puts "Hue is #{@client.lights.first.hue}"
+  puts "Temperature is #{@client.lights.first.color_temperature}"
+
+
+
   if brightness >= 245
     puts "Flash was 100%"
   else
@@ -24,7 +35,7 @@ def strobe(strike_distance)
   rand(3..10).times do
     light = @client.lights[rand(0..2)]
     light.set_state({bri: brightness, on: true, transitiontime: rand(0..3)})
-    light.set_state({:on => false, color_temperature: 153, transitiontime: rand(0..3)})
+    light.set_state({:on => false, transitiontime: rand(0..3)})
   end
 end
 
@@ -51,7 +62,7 @@ while true do
 
   thunder(strike_distance)
 
-  strike_interval = rand(0..10)
+  strike_interval = rand(0..600)
   puts "\nNext strike in #{(strike_interval/60.0).round(2)} minutes"
   sleep(strike_interval)
   puts "-----------------------------------"
